@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>管理者画面</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container admin">
+    <h1>🔧 管理者画面</h1>
+
+    <table>
+      <tr>
+        <th>回</th>
+        <th>残り人数</th>
+        <th>定員</th>
+      </tr>
+      {% for s in slots %}
+      <tr>
+        <td>{{ s.name }}</td>
+        <td>{{ s.remaining }}</td>
+        <td>{{ s.capacity }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <form method="post" action="/admin/reset">
+      <button class="danger">人数をリセット</button>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>新歓説明会 参加フォーム | 早稲田大学放送研究会（WHK）</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container glow">
+    <h1>新歓説明会<br>参加フォーム</h1>
+
+    <form method="post" action="/submit">
+      <label>名前</label>
+      <input type="text" name="name" required>
+
+      <label>学年</label>
+      <select name="grade" required>
+        <option value="">選択してください</option>
+        <option value="1">1年</option>
+        <option value="2">2年</option>
+      </select>
+
+      <label>参加希望回</label>
+      <div class="slots">
+        {% for s in slots %}
+          <label class="slot {% if s.disabled %}disabled{% endif %}">
+            <input type="radio" name="slot" value="{{ s.name }}"
+              {% if s.disabled %}disabled{% endif %} required>
+
+            <span class="slot-name">{{ s.name }}</span>
+            <span class="slot-remain">残り {{ s.remaining }} 人</span>
+
+            {% if s.recommend %}
+              <span class="badge">おすすめ！</span>
+            {% endif %}
+          </label>
+        {% endfor %}
+      </div>
+
+      <button type="submit">参加する 🚀</button>
+    </form>
+  </div>
+</body>
+</html>
